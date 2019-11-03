@@ -1,0 +1,32 @@
+package trip;
+
+import java.util.Date;
+import java.util.List;
+
+public class TripServiceImpl implements TripService{
+    private TripDao tripDao;
+
+    public TripServiceImpl() {
+        this.tripDao = new TripDaoImpl();
+    }
+
+    public List<Trip> getAllTrips() {
+        return tripDao.getAllTrips();
+    }
+
+    public Trip getTrip(int id) {
+        return tripDao.getTrip(id);
+    }
+
+    public void addTrip(Date date, String from, String to, int count) {
+        tripDao.addTrip(date, from, to, count);
+    }
+
+    public void updateTrip(int id, Date date, String from, String to, int count) {
+        tripDao.updateTrip(id, date, from, to, count);
+    }
+
+    public void deleteTrip(int id) {
+        tripDao.deleteTrip(id);
+    }
+}
