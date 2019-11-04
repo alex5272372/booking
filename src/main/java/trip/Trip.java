@@ -22,6 +22,10 @@ public class Trip {
         this.count = count;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -64,5 +68,9 @@ public class Trip {
 
     public String toString(int free) {
          return String.format("|%10d| %tD |%-30s|%-30s|%10d|%10d|", id, date, from, to, count, free);
+    }
+
+    public String toCsvString() {
+       return this.id + ";" + this.date.getDay()+";" +this.date.getTime()+";" + this.from +";"+ this.to +";"+ this.count +";";
     }
 }

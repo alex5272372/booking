@@ -6,8 +6,8 @@ import java.util.List;
 public class TripControllerImpl implements TripController {
     private TripService tripService;
 
-    public TripControllerImpl() {
-        this.tripService = new TripServiceImpl();
+    public TripControllerImpl(TripService tripService) {
+        this.tripService = tripService;
     }
 
     public List<Trip> getAllTrips() {

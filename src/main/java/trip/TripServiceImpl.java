@@ -6,8 +6,8 @@ import java.util.List;
 public class TripServiceImpl implements TripService{
     private TripDao tripDao;
 
-    public TripServiceImpl() {
-        this.tripDao = new TripDaoImpl();
+    public TripServiceImpl(TripDao tripDao) {
+        this.tripDao = tripDao;
     }
 
     public List<Trip> getAllTrips() {
