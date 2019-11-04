@@ -2,6 +2,7 @@ package trip;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TripServiceImpl implements TripService{
     private TripDao tripDao;
@@ -28,5 +29,13 @@ public class TripServiceImpl implements TripService{
 
     public void deleteTrip(int id) {
         tripDao.deleteTrip(id);
+    }
+
+    public List<Trip> getTripsNearest24Hours() {
+        return tripDao.getTripsNearest24Hours();
+    }
+
+    public List<Trip> getTripsByFromAndDate(String from, Date date) {
+        return tripDao.getTripsByFromAndDate(from, date);
     }
 }

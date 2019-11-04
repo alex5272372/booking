@@ -29,4 +29,12 @@ public class TripControllerImpl implements TripController {
     public void deleteTrip(int id) {
         tripService.deleteTrip(id);
     }
+
+    public List<Trip> getTripsNearest24Hours() {
+        return tripService.getTripsNearest24Hours();
+    }
+
+    public List<Trip> getTripsByFromAndDate(String from, Date date) {
+        return tripService.getTripsByFromAndDate(from, date);
+    }
 }
