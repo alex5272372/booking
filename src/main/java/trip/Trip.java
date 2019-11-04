@@ -53,4 +53,16 @@ public class Trip {
     public void setCount(int count) {
         this.count = count;
     }
+
+    public static String toStringHeader() {
+        return "+----id----+---date---+-------------from-------------+--------------to--------------+--count---+---free---+";
+    }
+
+    public static String toStringFooter() {
+        return "+----------+----------+------------------------------+------------------------------+----------+----------+";
+    }
+
+    public String toString(int free) {
+         return String.format("|%10d| %tD |%-30s|%-30s|%10d|%10d|", id, date, from, to, count, free);
+    }
 }
