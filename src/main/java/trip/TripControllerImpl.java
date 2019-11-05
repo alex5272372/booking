@@ -1,5 +1,7 @@
 package trip;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -28,5 +30,25 @@ public class TripControllerImpl implements TripController {
 
     public void deleteTrip(int id) {
         tripService.deleteTrip(id);
+    }
+
+    public List<Trip> getNearestTrips(int hours) {
+        return tripService.getNearestTrips(hours);
+    }
+
+    public List<Trip> getTripsByParams(Date date, String from, String to) {
+        return tripService.getTripsByParams(date, from, to);
+    }
+
+    public void read() throws IOException {
+        tripService.read();
+    }
+
+    public void write() throws IOException {
+        tripService.write();
+    }
+
+    public Trip transformStringToTrip(String str) throws ParseException {
+        return tripService.transformStringToTrip(str);
     }
 }

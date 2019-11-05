@@ -1,7 +1,10 @@
 package trip;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TripServiceImpl implements TripService{
     private TripDao tripDao;
@@ -28,5 +31,25 @@ public class TripServiceImpl implements TripService{
 
     public void deleteTrip(int id) {
         tripDao.deleteTrip(id);
+    }
+
+    public List<Trip> getNearestTrips(int hours) {
+        return tripDao.getNearestTrips(hours);
+    }
+
+    public List<Trip> getTripsByParams(Date date, String from, String to) {
+        return tripDao.getTripsByParams(date, from, to);
+    }
+
+    public void read() throws IOException {
+        tripDao.read();
+    }
+
+    public void write() throws IOException {
+        tripDao.write();
+    }
+
+    public Trip transformStringToTrip(String str) throws ParseException {
+        return tripDao.transformStringToTrip(str);
     }
 }
