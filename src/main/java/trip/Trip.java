@@ -2,32 +2,30 @@ package trip;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class Trip {
-    private static int maxId;
     private int id;
     private Date date;
-    private String from;
-    private String to;
+    private Enum from;
+    private Enum to;
     private int count;
 
-    static {
-        maxId = 0;
-    }
+    private TripController tripController;
 
     public Trip(Date date, String from, String to, int count) {
-        this.id = maxId++;
+        this.id = generateId();
         this.date = date;
-        this.from = from;
-        this.to = to;
+        this.from = City.get(from);
+        this.to = City.get(to);
         this.count = count;
     }
 
     public Trip(int id, Date date, String from, String to, int count) {
-        this.id = id;
+        this.id = generateId();
         this.date = date;
-        this.from = from;
-        this.to = to;
+        this.from = City.get(from);
+        this.to = City.get(to);
         this.count = count;
     }
 
@@ -43,20 +41,20 @@ public class Trip {
         this.date = date;
     }
 
-    public String getFrom() {
+    public Enum getFrom() {
         return from;
     }
 
     public void setFrom(String from) {
-        this.from = from;
+        this.from = City.get(from);
     }
 
-    public String getTo() {
+    public Enum getTo() {
         return to;
     }
 
     public void setTo(String to) {
-        this.to = to;
+        this.to = City.get(to);
     }
 
     public int getCount() {
@@ -81,6 +79,27 @@ public class Trip {
 
     public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        return this.id + ";" + dateFormat.format(this.date) + ";" + this.from + ";" + this.to + ";" + this.count + ";";
+        return this.id + ";" +
+                dateFormat.format(this.date) + ";" +
+                City.getCode(this.from) + ";" +
+                City.getCode(this.to) + ";" + this.count + ";";
+    }
+
+    public int generateId() {
+        int id = getRandomInt(1000, 9999);
+        while (isNotUniqueId(id)) {
+            id = getRandomInt(1000, 9999);
+        }
+        return id;
+    }
+
+    int getRandomInt(int from, int to) {
+        Random random = new Random();
+        return from + random.nextInt(to - from + 1);
+    }
+
+    boolean isNotUniqueId(int id) {
+        if (tripController == null) return false;
+        return tripController.getAllTrips().stream().anyMatch(trip -> trip.getId() == id);
     }
 }

@@ -46,9 +46,10 @@ public class TripDaoImpl implements TripDao {
     }
 
     public List<Trip> getTripsByParams(Date date, String from, String to) {
-        return getAllTrips().stream().filter(trip -> (trip.getDate() == date) &&
-                (trip.getFrom() == from) &&
-                (trip.getTo() == to))
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return getAllTrips().stream().filter(trip -> (dateFormat.format(trip.getDate()) == dateFormat.format(date)) &&
+                (trip.getFrom() == City.valueOf(from)) &&
+                (trip.getTo() == City.valueOf(to)))
                 .collect(Collectors.toList());
     }
 
