@@ -1,5 +1,7 @@
 package trip;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Trip {
@@ -59,15 +61,15 @@ public class Trip {
     }
 
     public static String toStringHeader() {
-        return "+----id----+---date---+-------------from-------------+--------------to--------------+--count---+---free---+";
+        return "+----id-----+-------date-------+-------------from--------------+--------------to---------------+---count---+---free----+";
     }
 
     public static String toStringFooter() {
-        return "+----------+----------+------------------------------+------------------------------+----------+----------+";
+        return "+-----------+------------------+-------------------------------+-------------------------------+-----------+-----------+";
     }
 
     public String toString(int free) {
-         return String.format("|%10d| %tD |%-30s|%-30s|%10d|%10d|", id, date, from, to, count, free);
+        return String.format("|%10d | %td/%tm/%tY %tH:%tM | %-30s| %-30s|%10d |%10d |", id, date, date, date, date, date, from, to, count, free);
     }
 
     public String toCsvString() {
