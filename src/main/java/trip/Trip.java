@@ -83,4 +83,8 @@ public class Trip {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return this.id + ";" + dateFormat.format(this.date) + ";" + this.from + ";" + this.to + ";" + this.count + ";";
     }
+
+    public String toCsvString() {
+       return this.id + ";" + this.date.getDay()+";" +this.date.getTime()+";" + this.from +";"+ this.to +";"+ this.count +";";
+    }
 }
