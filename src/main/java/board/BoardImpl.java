@@ -1,11 +1,11 @@
 package board;
 
 import trip.Trip;
+import trip.TripController;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class BoardImpl implements Board {
     private State state;
@@ -33,9 +33,7 @@ public class BoardImpl implements Board {
 
     public void displayTrips(List<Trip> trips) {
         System.out.println(Trip.toStringHeader());
-        for(Trip trip : trips) {
-            System.out.println(trip.toString(0));
-        }
+        trips.stream().forEach(trip -> System.out.println(trip.toString(0)));
         System.out.println(Trip.toStringFooter());
     }
 
@@ -45,21 +43,14 @@ public class BoardImpl implements Board {
         displayTrips(trips);
     }
 
-    public void inputCommand() {
-        // + Test block
-        List<Trip> trips = new ArrayList<Trip>();
-        trips.add(new Trip(new Date(), "Kiev", "London", 100));
-        trips.add(new Trip(new Date(), "Kiev", "Paris", 150));
-        trips.add(new Trip(new Date(), "Kiev", "Lviv", 200));
-        // - Test block
-
+    public void inputCommand(TripController tripController) throws extInputException {
         Scanner sc = new Scanner(System.in);
 
         if(state == State.MAIN_MENU) {
             displayMenu();
             int item = sc.nextInt();
             if(item == 1) {
-                displayTrips(trips);
+                displayTrips(tripController.getNearestTrips(24));
             } else if(item == 2) {
                 setState(State.GET_TRIP);
             } else if(item == 3) {
@@ -70,24 +61,36 @@ public class BoardImpl implements Board {
 
             } else if(item == 6) {
                 setState(State.EXIT);
+            } else {
+                throw new extInputException("Item does not exist");
             }
 
         } else if(state == State.GET_TRIP) {
             System.out.println("Enter trip ID:");
             int id = sc.nextInt();
-            displayTrip(trips.get(id));
+            Trip trip = tripController.getTrip(id);
+            displayTrip(trip);
             setState(State.MAIN_MENU);
 
         } else if(state == State.FIND_TRIP) {
-            System.out.println("Enter destination:");
-            int dest = sc.nextInt();
-            System.out.println("Enter date:");
-            int date = sc.nextInt();
-            System.out.println("Enter count:");
-            int count = sc.nextInt();
-            // TODO: find trips
-            displayTrips(trips);
-            setState(State.FOUND_TRIP);
+            try {
+                System.out.println("Enter destination:");
+                String dest = sc.nextLine();
+
+                System.out.println("Enter date in format dd/MM/yyyy:");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String dateString = sc.nextLine();
+
+                Date date = dateFormat.parse(dateString);
+
+                System.out.println("Enter count:");
+                int count = sc.nextInt();
+
+                displayTrips(tripController.getTripsByParams(date, "Kiev", dest));
+                setState(State.FOUND_TRIP);
+            } catch (ParseException e) {
+                System.out.println("ERROR: Incorrect input for date");
+            }
 
         } else if(state == State.FOUND_TRIP) {
             System.out.println("Enter trip ID (or -1 for cancel):");
