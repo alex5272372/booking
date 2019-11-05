@@ -1,6 +1,5 @@
 package trip;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +17,14 @@ public class Trip {
 
     public Trip(Date date, String from, String to, int count) {
         this.id = maxId++;
+        this.date = date;
+        this.from = from;
+        this.to = to;
+        this.count = count;
+    }
+
+    public Trip(int id, Date date, String from, String to, int count) {
+        this.id = id;
         this.date = date;
         this.from = from;
         this.to = to;
@@ -73,6 +80,7 @@ public class Trip {
     }
 
     public String toCsvString() {
-       return this.id + ";" + this.date.getDay()+";" +this.date.getTime()+";" + this.from +";"+ this.to +";"+ this.count +";";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return this.id + ";" + dateFormat.format(this.date) + ";" + this.from + ";" + this.to + ";" + this.count + ";";
     }
 }
