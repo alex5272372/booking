@@ -1,6 +1,7 @@
 package board;
 
 import trip.Trip;
+import trip.TripController;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,9 +34,7 @@ public class BoardImpl implements Board {
 
     public void displayTrips(List<Trip> trips) {
         System.out.println(Trip.toStringHeader());
-        for(Trip trip : trips) {
-            System.out.println(trip.toString(0));
-        }
+        trips.stream().forEach(trip -> System.out.println(trip.toString(0)));
         System.out.println(Trip.toStringFooter());
     }
 
@@ -45,21 +44,15 @@ public class BoardImpl implements Board {
         displayTrips(trips);
     }
 
-    public void inputCommand() {
-        // + Test block
-        List<Trip> trips = new ArrayList<Trip>();
-        trips.add(new Trip(new Date(), "Kiev", "London", 100));
-        trips.add(new Trip(new Date(), "Kiev", "Paris", 150));
-        trips.add(new Trip(new Date(), "Kiev", "Lviv", 200));
-        // - Test block
-
+    public void inputCommand(TripController tripController) {
         Scanner sc = new Scanner(System.in);
 
         if(state == State.MAIN_MENU) {
             displayMenu();
             int item = sc.nextInt();
             if(item == 1) {
-                displayTrips(trips);
+                //displayTrips(tripController.getNearestTrips(24));
+                displayTrips(tripController.getAllTrips());
             } else if(item == 2) {
                 setState(State.GET_TRIP);
             } else if(item == 3) {
@@ -75,7 +68,7 @@ public class BoardImpl implements Board {
         } else if(state == State.GET_TRIP) {
             System.out.println("Enter trip ID:");
             int id = sc.nextInt();
-            displayTrip(trips.get(id));
+            displayTrip(tripController.getTrip(id));
             setState(State.MAIN_MENU);
 
         } else if(state == State.FIND_TRIP) {
@@ -86,7 +79,8 @@ public class BoardImpl implements Board {
             System.out.println("Enter count:");
             int count = sc.nextInt();
             // TODO: find trips
-            displayTrips(trips);
+            //displayTrips(tripController.getTripsByParams(date, "Kiev", dest));
+            displayTrips(tripController.getAllTrips());
             setState(State.FOUND_TRIP);
 
         } else if(state == State.FOUND_TRIP) {
