@@ -1,5 +1,7 @@
 package trip;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -11,4 +13,7 @@ public interface TripDao {
     void deleteTrip(int id);
     List<Trip> getTripsNearest24Hours();
     List<Trip> getTripsByFromAndDate(String from, Date date);
+    void write() throws IOException;
+    void read() throws IOException;
+    Trip transformStringToTrip(String str) throws ParseException;
 }

@@ -1,5 +1,7 @@
 package trip;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,5 +39,17 @@ public class TripServiceImpl implements TripService{
 
     public List<Trip> getTripsByFromAndDate(String from, Date date) {
         return tripDao.getTripsByFromAndDate(from, date);
+    }
+
+    public void read() throws IOException {
+        tripDao.read();
+    }
+
+    public void write() throws IOException {
+        tripDao.write();
+    }
+
+    public Trip transformStringToTrip(String str) throws ParseException {
+        return tripDao.transformStringToTrip(str);
     }
 }
