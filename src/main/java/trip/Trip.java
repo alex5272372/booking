@@ -68,23 +68,19 @@ public class Trip {
     }
 
     public static String toStringHeader() {
-        return "+----id----+---date---+-------------from-------------+--------------to--------------+--count---+---free---+";
+        return "+----id-----+-------date-------+-------------from--------------+--------------to---------------+---count---+---free----+";
     }
 
     public static String toStringFooter() {
-        return "+----------+----------+------------------------------+------------------------------+----------+----------+";
+        return "+-----------+------------------+-------------------------------+-------------------------------+-----------+-----------+";
     }
 
     public String toString(int free) {
-        return String.format("|%10d| %tD |%-30s|%-30s|%10d|%10d|", id, date, from, to, count, free);
+        return String.format("|%10d | %td/%tm/%tY %tH:%tM | %-30s| %-30s|%10d |%10d |", id, date, date, date, date, date, from, to, count, free);
     }
 
     public String toCsvString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return this.id + ";" + dateFormat.format(this.date) + ";" + this.from + ";" + this.to + ";" + this.count + ";";
-    }
-
-    public String toCsvString() {
-       return this.id + ";" + this.date.getDay()+";" +this.date.getTime()+";" + this.from +";"+ this.to +";"+ this.count +";";
     }
 }
