@@ -1,6 +1,8 @@
 package board;
 
 import trip.Trip;
+import trip.TripController;
+
 import java.util.List;
 
 public interface Board {
@@ -8,5 +10,5 @@ public interface Board {
     void setState(State state);
     void displayMenu();
     void displayTrips(List<Trip> trips);
-    void inputCommand();
+    void inputCommand(TripController tripController) throws extInputException;
 }
