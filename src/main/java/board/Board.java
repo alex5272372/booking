@@ -10,5 +10,5 @@ public interface Board {
     void setState(State state);
     void displayMenu();
     void displayTrips(List<Trip> trips);
-    void inputCommand(TripController tripController);
+    void inputCommand(TripController tripController) throws extInputException;
 }

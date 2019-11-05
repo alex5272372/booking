@@ -3,12 +3,15 @@ package main;
 import board.Board;
 import board.BoardImpl;
 import board.State;
+import board.extInputException;
 import trip.TripController;
 import trip.TripControllerImpl;
 import trip.TripDaoImpl;
 import trip.TripServiceImpl;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 //import java.util.Date;
 
 public class Main {
@@ -22,7 +25,15 @@ public class Main {
 
         Board board = new BoardImpl();
         while(board.getState() != State.EXIT) {
-            board.inputCommand(tripController);
+            try {
+                board.inputCommand(tripController);
+            } catch(InputMismatchException e) {
+                System.out.println("ERROR: Your input is invalid, please try again");
+            } catch(NoSuchElementException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            } catch (extInputException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
         };
 
         /*tripController.addTrip(new Date(), "Kiev", "Lviv", 100);
