@@ -39,15 +39,16 @@ public class TripDaoImpl implements TripDao {
         return getAllTrips().stream().anyMatch(trip -> trip.getId() == id);
     }
 
-    public List<Trip> getTripsNearest24Hours() {
+    public List<Trip> getNearestTrips(int hours) {
         return getAllTrips().stream().filter(trip -> (trip.getDate().getTime() > new Date().getTime()) &&
-                (trip.getDate().getTime() < new Date().getTime() + 1000 * 60 * 60 * 24))
+                (trip.getDate().getTime() < new Date().getTime() + 1000 * 60 * 60 * hours))
                 .collect(Collectors.toList());
     }
 
-    public List<Trip> getTripsByFromAndDate(String from, Date date) {
-        return getAllTrips().stream().filter(trip -> (trip.getFrom() == from) &&
-                (trip.getDate() == date))
+    public List<Trip> getTripsByParams(Date date, String from, String to) {
+        return getAllTrips().stream().filter(trip -> (trip.getDate() == date) &&
+                (trip.getFrom() == from) &&
+                (trip.getTo() == to))
                 .collect(Collectors.toList());
     }
 
@@ -82,6 +83,6 @@ public class TripDaoImpl implements TripDao {
         int id = Integer.parseInt(arr[0]);
         Date date = dateFormat.parse(arr[1]);
         int count = Integer.parseInt(arr[4]);
-        return new Trip(id, date, arr[2],arr[3], count);
+        return new Trip(id, date, arr[2], arr[3], count);
     }
 }

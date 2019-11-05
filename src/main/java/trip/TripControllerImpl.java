@@ -32,12 +32,12 @@ public class TripControllerImpl implements TripController {
         tripService.deleteTrip(id);
     }
 
-    public List<Trip> getTripsNearest24Hours() {
-        return tripService.getTripsNearest24Hours();
+    public List<Trip> getNearestTrips(int hours) {
+        return tripService.getNearestTrips(hours);
     }
 
-    public List<Trip> getTripsByFromAndDate(String from, Date date) {
-        return tripService.getTripsByFromAndDate(from, date);
+    public List<Trip> getTripsByParams(Date date, String from, String to) {
+        return tripService.getTripsByParams(date, from, to);
     }
 
     public void read() throws IOException {

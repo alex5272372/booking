@@ -11,8 +11,8 @@ public interface TripController {
     void addTrip(Date date, String from, String to, int count);
     void updateTrip(int id, Date date, String from, String to, int count);
     void deleteTrip(int id);
-    List<Trip> getTripsNearest24Hours();
-    List<Trip> getTripsByFromAndDate(String from, Date date);
+    List<Trip> getNearestTrips(int hours);
+    List<Trip> getTripsByParams(Date date, String from, String to);
     void write() throws IOException;
     void read() throws IOException;
     Trip transformStringToTrip(String str) throws ParseException;
