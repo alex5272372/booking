@@ -14,19 +14,19 @@ public class Trip {
 
     private TripController tripController;
 
-    public Trip(Date date, String from, String to, int count) {
+    public Trip(Date date, City from, City to, int count) {
         this.id = generateId();
         this.date = date;
-        this.from = City.get(from);
-        this.to = City.get(to);
+        this.from = from;
+        this.to = to;
         this.count = count;
     }
 
-    public Trip(int id, Date date, String from, String to, int count) {
-        this.id = generateId();
+    public Trip(int id, Date date, City from, City to, int count) {
+        this.id = id;
         this.date = date;
-        this.from = City.get(from);
-        this.to = City.get(to);
+        this.from = from;
+        this.to = to;
         this.count = count;
     }
 
@@ -42,20 +42,20 @@ public class Trip {
         this.date = date;
     }
 
-    public Enum getFrom() {
+    public City getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = City.get(from);
+    public void setFrom(City from) {
+        this.from = from;
     }
 
     public Enum getTo() {
         return to;
     }
 
-    public void setTo(String to) {
-        this.to = City.get(to);
+    public void setTo(City to) {
+        this.to = to;
     }
 
     public int getCount() {
@@ -83,8 +83,8 @@ public class Trip {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return this.id + ";" +
                 dateFormat.format(this.date) + ";" +
-                City.getCode(this.from) + ";" +
-                City.getCode(this.to) + ";" + this.count + ";";
+                this.from.getName() + ";" +
+                this.to.getName() + ";" + this.count + ";";
     }
 
     public int generateId() {
