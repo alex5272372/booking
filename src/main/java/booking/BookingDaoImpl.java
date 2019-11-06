@@ -1,5 +1,6 @@
 package booking;
 
+import users.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,18 @@ public class BookingDaoImpl implements BookingDao{
     }
 
     public List<Booking> getAllBookings() {
-        return null;
+        return bookingList;
     }
 
     public Booking getBooking(int id) {
         return null;
     }
 
-    public void addBooking(int tripId, String firstName, String lastName) {
-
+    public void addBooking(int tripId, User user) {
+        bookingList.add(new Booking(tripId, user));
     }
 
-    public void updateBooking(int id, int tripId, String firstName, String lastName) {
+    public void updateBooking(int id, int tripId, User user) {
 
     }
 

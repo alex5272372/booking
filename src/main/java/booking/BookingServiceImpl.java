@@ -1,5 +1,6 @@
 package booking;
 
+import users.User;
 import java.util.List;
 
 public class BookingServiceImpl implements BookingService {
@@ -17,12 +18,12 @@ public class BookingServiceImpl implements BookingService {
         return bookingDao.getBooking(id);
     }
 
-    public void addBooking(int tripId, String firstName, String lastName) {
-        bookingDao.addBooking(tripId, firstName, lastName);
+    public void addBooking(int tripId, User user) {
+        bookingDao.addBooking(tripId, user);
     }
 
-    public void updateBooking(int id, int tripId, String firstName, String lastName) {
-        bookingDao.updateBooking(id, tripId, firstName, lastName);
+    public void updateBooking(int id, int tripId, User user) {
+        bookingDao.updateBooking(id, tripId, user);
     }
 
     public void deleteBooking(int id) {

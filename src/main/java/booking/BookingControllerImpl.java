@@ -1,5 +1,6 @@
 package booking;
 
+import users.User;
 import java.util.List;
 
 public class BookingControllerImpl implements BookingController {
@@ -17,12 +18,12 @@ public class BookingControllerImpl implements BookingController {
         return bookingService.getBooking(id);
     }
 
-    public void addBooking(int tripId, String firstName, String lastName) {
-        bookingService.addBooking(tripId, firstName, lastName);
+    public void addBooking(int tripId, User user) {
+        bookingService.addBooking(tripId, user);
     }
 
-    public void updateBooking(int id, int tripId, String firstName, String lastName) {
-        bookingService.updateBooking(id, tripId, firstName, lastName);
+    public void updateBooking(int id, int tripId, User user) {
+        bookingService.updateBooking(id, tripId, user);
     }
 
     public void deleteBooking(int id) {
