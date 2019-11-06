@@ -1,5 +1,7 @@
 package trip;
 
+import main.City;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
@@ -20,11 +22,11 @@ public class TripControllerImpl implements TripController {
         return tripService.getTrip(id);
     }
 
-    public void addTrip(Date date, String from, String to, int count) {
+    public void addTrip(Date date, City from, City to, int count) {
         tripService.addTrip(date, from, to, count);
     }
 
-    public void updateTrip(int id, Date date, String from, String to, int count) {
+    public void updateTrip(int id, Date date, City from, City to, int count) {
         tripService.updateTrip(id, date, from, to, count);
     }
 
@@ -36,7 +38,7 @@ public class TripControllerImpl implements TripController {
         return tripService.getNearestTrips(hours);
     }
 
-    public List<Trip> getTripsByParams(Date date, String from, String to) {
+    public List<Trip> getTripsByParams(Date date, City from, City to) {
         return tripService.getTripsByParams(date, from, to);
     }
 

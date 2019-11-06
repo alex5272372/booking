@@ -26,6 +26,8 @@ public enum City {
     static {
         Arrays.stream(City.values())
                 .forEach(city -> lookup.put(city.getCode(), city));
+        Arrays.stream(City.values())
+                .forEach(city -> lookup.put(city.getName(), city));
         Arrays.stream(City.values()).forEach(city -> ids[city.getId()] = city);
     }
 
@@ -41,6 +43,10 @@ public enum City {
 
     public static City get(String code) {
         return lookup.get(code);
+    }
+
+    public static City getByName(String name) {
+        return lookup.get(name);
     }
 
     public static String getCode(Enum e) {
