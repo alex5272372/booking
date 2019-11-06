@@ -29,12 +29,10 @@ public class Main {
                 board.inputCommand(tripController);
             } catch(InputMismatchException e) {
                 System.out.println("ERROR: Your input is invalid, please try again");
-            } catch(NoSuchElementException e) {
-                System.out.println("ERROR: " + e.getMessage());
-            } catch (extInputException e) {
+            } catch(NoSuchElementException | extInputException e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
-        };
+        }
 
         /*tripController.addTrip(new Date(), "Kiev", "Lviv", 100);
         tripController.addTrip(new Date(), "Kiev", "London", 100);*/
