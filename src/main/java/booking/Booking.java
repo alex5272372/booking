@@ -33,4 +33,16 @@ public class Booking {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public static String toStringHeader() {
+        return "+----id-----+--tripId---+------------------user-------------------+";
+    }
+
+    public static String toStringFooter() {
+        return "+-----------+-----------+-----------------------------------------+";
+    }
+
+    public String toString() {
+        return String.format("|%10d |%10d | %-40s|", id, tripId, user.getFullName());
+    }
 }

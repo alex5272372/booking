@@ -1,8 +1,12 @@
 package board;
 
+import booking.Booking;
+import booking.BookingController;
 import main.City;
 import trip.Trip;
 import trip.TripController;
+import users.User;
+import users.Users;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +48,13 @@ public class BoardImpl implements Board {
         displayTrips(trips);
     }
 
-    public void inputCommand(TripController tripController) throws extInputException {
+    public void displayBookings(List<Booking> bookings) {
+        System.out.println(Booking.toStringHeader());
+        bookings.stream().forEach(booking -> System.out.println(booking.toString()));
+        System.out.println(Booking.toStringFooter());
+    }
+
+    public void inputCommand(Users users, TripController tripController, BookingController bookingController) throws extInputException {
         Scanner sc = new Scanner(System.in);
 
         if(state == State.MAIN_MENU) {
@@ -58,9 +68,9 @@ public class BoardImpl implements Board {
             } else if(item == 3) {
                 setState(State.FIND_TRIP);
             } else if(item == 4) {
-
+                setState(State.UNDO_BOOKING);
             } else if(item == 5) {
-
+                displayBookings(bookingController.getAllBookings());
             } else if(item == 6) {
                 setState(State.EXIT);
             } else {
@@ -93,24 +103,44 @@ public class BoardImpl implements Board {
 
                 Date date = dateFormat.parse(dateString);
 
-                System.out.println("Enter count:");
-                int count = sc.nextInt();
-                sc.nextLine();
-
-                //displayTrips(tripController.getTripsByParams(date, City.KYIV, City.getById(dest)));
-                displayTrips(tripController.getAllTrips());
-                setState(State.FOUND_TRIP);
+                displayTrips(tripController.getTripsByParams(date, City.KYIV, City.get(dest)));
+                setState(State.BOOK_TRIP);
             } catch (ParseException e) {
                 System.out.println("ERROR: Incorrect input for date");
             }
 
-        } else if(state == State.FOUND_TRIP) {
+        } else if(state == State.BOOK_TRIP) {
+            System.out.println("Enter count:");
+            int count = sc.nextInt();
+            sc.nextLine();
+
             System.out.println("Enter trip ID (or -1 for cancel):");
             int id = sc.nextInt();
             sc.nextLine();
-            if(id == -1) {
-                setState(State.MAIN_MENU);
+
+            if(id != -1) {
+                Trip trip = tripController.getTrip(id);
+                if(trip.getCount() < bookingController.getCount(id) + count) {
+                    throw new extInputException("Not enough places for booking");
+                }
+
+                for(int i = 1; i <= count; i++) {
+                    System.out.println("USER " + i);
+                    System.out.println("Enter first name and last name, or login:");
+                    String login = sc.nextLine();
+                    User user = users.getOrAddUser(login);
+                    bookingController.addBooking(id, user);
+                }
+                System.out.println("BOOKING COMPLETED");
             }
+            setState(State.MAIN_MENU);
+
+        } else if(state == State.UNDO_BOOKING) {
+            System.out.println("Enter booking ID:");
+            int id = sc.nextInt();
+            sc.nextLine();
+            bookingController.deleteBooking(id);
+            setState(State.MAIN_MENU);
         }
     }
 }

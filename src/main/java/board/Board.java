@@ -1,7 +1,9 @@
 package board;
 
+import booking.BookingController;
 import trip.Trip;
 import trip.TripController;
+import users.Users;
 
 import java.util.List;
 
@@ -10,5 +12,5 @@ public interface Board {
     void setState(State state);
     void displayMenu();
     void displayTrips(List<Trip> trips);
-    void inputCommand(TripController tripController) throws extInputException;
+    void inputCommand(Users users, TripController tripController, BookingController bookingController) throws extInputException;
 }

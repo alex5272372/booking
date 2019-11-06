@@ -8,17 +8,21 @@ public class User {
     private String login;
     private String password;
 
-    public User(String firstName, String lastName, String login, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String login, String password) {
+        String[] words = login.split(" ");
+
+        this.firstName = words.length > 0 ? words[0] : "";
+        this.lastName = words.length > 1 ? words[1] : "";
         this.login = login;
         this.password = password;
     }
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.login = firstName + " " + lastName;
+    public User(String login) {
+        String[] words = login.split(" ");
+
+        this.firstName = words.length > 0 ? words[0] : "";
+        this.lastName = words.length > 1 ? words[1] : "";
+        this.login = login;
 
         Random random = new Random();
         this.password = String.valueOf(random.nextInt(1000000));
@@ -30,6 +34,24 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     @Override
