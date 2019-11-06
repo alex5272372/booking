@@ -19,11 +19,11 @@ public class TripDaoImpl implements TripDao {
         return getAllTrips().stream().filter(trip -> trip.getId() == id).findFirst().get();
     }
 
-    public void addTrip(Date date, String from, String to, int count) {
+    public void addTrip(Date date, City from, City to, int count) {
         tripList.add(new Trip(date, from, to, count));
     }
 
-    public void updateTrip(int id, Date date, String from, String to, int count) {
+    public void updateTrip(int id, Date date, City from, City to, int count) {
         if (isPresentId(id)) {
             getTrip(id).setDate(date);
             getTrip(id).setFrom(from);
@@ -46,11 +46,11 @@ public class TripDaoImpl implements TripDao {
                 .collect(Collectors.toList());
     }
 
-    public List<Trip> getTripsByParams(Date date, String from, String to) {
+    public List<Trip> getTripsByParams(Date date, City from, City to) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return getAllTrips().stream().filter(trip -> (dateFormat.format(trip.getDate()) == dateFormat.format(date)) &&
-                (trip.getFrom() == City.valueOf(from)) &&
-                (trip.getTo() == City.valueOf(to)))
+                (trip.getFrom() == from) &&
+                (trip.getTo() == to))
                 .collect(Collectors.toList());
     }
 
@@ -84,7 +84,9 @@ public class TripDaoImpl implements TripDao {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         int id = Integer.parseInt(arr[0]);
         Date date = dateFormat.parse(arr[1]);
+        City from = City.getByName(arr[2]);
+        City to = City.getByName(arr[3]);
         int count = Integer.parseInt(arr[4]);
-        return new Trip(id, date, arr[2], arr[3], count);
+        return new Trip(id, date, from, to, count);
     }
 }
