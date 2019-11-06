@@ -1,5 +1,6 @@
 package trip;
 
+import main.City;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -7,8 +8,8 @@ import java.util.Random;
 public class Trip {
     private int id;
     private Date date;
-    private Enum from;
-    private Enum to;
+    private City from;
+    private City to;
     private int count;
 
     private TripController tripController;
@@ -74,7 +75,8 @@ public class Trip {
     }
 
     public String toString(int free) {
-        return String.format("|%10d | %td/%tm/%tY %tH:%tM | %-30s| %-30s|%10d |%10d |", id, date, date, date, date, date, from, to, count, free);
+        return String.format("|%10d | %td/%tm/%tY %tH:%tM | %-30s| %-30s|%10d |%10d |",
+                id, date, date, date, date, date, from.getName(), to.getName(), count, free);
     }
 
     public String toCsvString() {

@@ -1,5 +1,6 @@
 package trip;
 
+import main.City;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
