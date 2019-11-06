@@ -1,21 +1,21 @@
 package booking;
 
+import users.User;
+
 public class Booking {
     private static int maxId;
     private int id;
     private int tripId;
-    private String firstName;
-    private String lastName;
+    private User user;
 
     static {
         maxId = 0;
     }
 
-    public Booking(int tripId, String firstName, String lastName) {
+    public Booking(int tripId, User user) {
         this.id = maxId++;
         this.tripId = tripId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.user = user;
     }
 
     public int getTripId() {
@@ -26,19 +26,11 @@ public class Booking {
         this.tripId = tripId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public User getUser() {
+        return user;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
