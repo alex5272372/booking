@@ -33,4 +33,10 @@ public class BookingServiceImpl implements BookingService {
     public int getCount(int tripId) {
         return 0;
     }
+
+    public void displayBookings(List<Booking> bookings) {
+        System.out.println(Booking.toStringHeader());
+        bookings.stream().forEach(booking -> System.out.println(booking.toString()));
+        System.out.println(Booking.toStringFooter());
+    }
 }

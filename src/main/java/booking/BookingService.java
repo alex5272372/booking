@@ -10,4 +10,5 @@ public interface BookingService {
     void updateBooking(int id, int tripId, User user);
     void deleteBooking(int id);
     int getCount(int tripId);
+    public void displayBookings(List<Booking> bookings);
 }
