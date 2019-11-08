@@ -9,28 +9,44 @@ public class Booking {
     private int bookingId;
     private int count;
     private User user;
+    private BookingController bookingController;
+    private int countLeft;
 
-    static {
-        maxId = 0;
-    }
-
-    public Booking(int tripId, int bookingId, int count, User user) {
+    public Booking(int tripId, int count, User user) {
         this.tripId = tripId;
-        this.bookingId = bookingId;
-        this.user = user;
+        this.bookingId = generateId();
         this.count = count;
+        this.countLeft = getCountLeft(count);
+        this.user = user;
     }
 
-
-
-    public int getTripId() {
-        return tripId;
+    public int getBooking() {
+        return bookingId;
     }
 
     public void setTripId(int tripId) {
         this.tripId = tripId;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public int getCountLeft(int count) {
+        return 1;
+    }
+    public int getCount (int count) {
+        return count;
+    }
+    public int getBookingId() {
+        return bookingId;
+    }
     public User getUser() {
         return user;
     }
@@ -48,9 +64,10 @@ public class Booking {
     }
 
     public String toString() {
-        return String.format("|%10d |%10d | %-40s|", id, tripId, user.getFullName());
+        return String.format(String.valueOf(bookingId), tripId, user.getFullName());
     }
-    public int generateId() {
+
+    private int generateId() {
         int id = getRandomInt(1000, 9999);
         while (isNotUniqueId(id)) {
             id = getRandomInt(1000, 9999);
@@ -58,13 +75,21 @@ public class Booking {
         return id;
     }
 
-    int getRandomInt(int from, int to) {
+    private int getRandomInt(int from, int to) {
         Random random = new Random();
         return from + random.nextInt(to - from + 1);
     }
 
-    boolean isNotUniqueId(int id) {
-        if (tripController == null) return false;
-        return tripController.getAllTrips().stream().anyMatch(trip -> trip.getId() == id);
+    private boolean isNotUniqueId(int id) {
+        if (bookingController == null) return false;
+        return bookingController.getAllBookings().stream().anyMatch(booking -> booking.getBookingId() == id);
     }
+
+    String toCsvString() {
+        return this.tripId + ";" +
+                this.bookingId + ";" +
+                this.count + ";" +
+                this.getUser() + ";";
+    }
+
 }

@@ -129,7 +129,7 @@ public class BoardImpl implements Board {
                     System.out.println("Enter first name and last name, or login:");
                     String login = sc.nextLine();
                     User user = users.getOrAddUser(login);
-                    bookingController.addBooking(id, user);
+                    bookingController.addBooking(id, count, user);
                 }
                 System.out.println("BOOKING COMPLETED");
             }

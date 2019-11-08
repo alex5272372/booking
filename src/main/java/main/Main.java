@@ -25,6 +25,7 @@ public class Main {
         users.addUser("Alex Nik");
         users.addUser("empty");
         users.addUser("Gogi Doe");
+        users.addUser("Vetal");
         // - Test code
 
         TripController tripController = new TripControllerImpl(new TripServiceImpl(new TripDaoImpl()));
