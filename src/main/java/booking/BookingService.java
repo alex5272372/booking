@@ -1,12 +1,14 @@
 package booking;
 
+import users.User;
 import java.util.List;
 
 public interface BookingService {
     List<Booking> getAllBookings();
     Booking getBooking(int id);
-    void addBooking(int tripId, String firstName, String lastName);
-    void updateBooking(int id, int tripId, String firstName, String lastName);
+    void addBooking(int tripId, User user);
+    void updateBooking(int id, int tripId, User user);
     void deleteBooking(int id);
     int getCount(int tripId);
+    public void displayBookings(List<Booking> bookings);
 }
