@@ -50,6 +50,10 @@ public class BookingServiceImpl implements BookingService {
         return bookingDao.transformStringToBooking(str);
     }
 
+    public List<Booking> getBookingsByUser(User user) {
+        return bookingDao.getBookingsByUser(user);
+    }
+
     public void displayBookings(List<Booking> bookings) {
         System.out.println(Booking.toStringHeader());
         bookings.stream().forEach(booking -> System.out.println(booking.toString()));
