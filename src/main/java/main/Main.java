@@ -25,15 +25,21 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         BookingController bookingController = new BookingController();
+        try {
+            bookingController.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Board board = new Board();
-        while(board.getState() != State.EXIT) {
+        while (board.getState() != State.EXIT) {
             try {
                 board.inputCommand(users, tripController, bookingController);
-            } catch(InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("ERROR: Your input is invalid, please try again");
-            } catch(NoSuchElementException | extInputException e) {
+            } catch (NoSuchElementException | extInputException e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
         }
@@ -43,6 +49,11 @@ public class Main {
 
         try {
             tripController.write();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            bookingController.write();
         } catch (IOException e) {
             e.printStackTrace();
         }

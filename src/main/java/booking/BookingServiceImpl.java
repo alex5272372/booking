@@ -1,6 +1,9 @@
 package booking;
 
 import users.User;
+
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 public class BookingServiceImpl implements BookingService {
@@ -18,6 +21,8 @@ public class BookingServiceImpl implements BookingService {
         return bookingDao.getBooking(id);
     }
 
+
+
     public void addBooking(int tripId, User user) {
         bookingDao.addBooking(tripId, user);
     }
@@ -31,7 +36,18 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public int getCount(int tripId) {
-        return 0;
+        return bookingDao.getCount(tripId);
+    }
+
+    public void read() throws IOException {
+        bookingDao.read();
+    }
+
+    public void write() throws IOException {
+        bookingDao.write();
+    }
+    public Booking transformStringToBooking(String str) throws ParseException{
+        return bookingDao.transformStringToBooking(str);
     }
 
     public void displayBookings(List<Booking> bookings) {
