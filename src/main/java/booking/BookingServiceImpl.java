@@ -47,4 +47,10 @@ public class BookingServiceImpl implements BookingService {
     public Booking transformStringToBooking(String str) throws ParseException{
         return bookingDao.transformStringToBooking(str);
     }
+
+    public void displayBookings(List<Booking> bookings) {
+        System.out.println(Booking.toStringHeader());
+        bookings.stream().forEach(booking -> System.out.println(booking.toString()));
+        System.out.println(Booking.toStringFooter());
+    }
 }

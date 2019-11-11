@@ -9,5 +9,13 @@
 3. Konev Vetal (booking)
 
 ## Agreement
+### Guest user
+Login: guest
+
+Password: 1
+
 ### Date format
 dd/MM/yyyy HH:mm
+
+### Files format
+CSV

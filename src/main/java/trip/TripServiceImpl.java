@@ -1,12 +1,13 @@
 package trip;
 
+import booking.Booking;
 import main.City;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TripServiceImpl implements TripService{
     private TripDao tripDao;
@@ -53,5 +54,17 @@ public class TripServiceImpl implements TripService{
 
     public Trip transformStringToTrip(String str) throws ParseException {
         return tripDao.transformStringToTrip(str);
+    }
+
+    public void displayTrips(List<Trip> trips) {
+        System.out.println(Trip.toStringHeader());
+        trips.stream().forEach(trip -> System.out.println(trip.toString(0)));
+        System.out.println(Trip.toStringFooter());
+    }
+
+    public void displayTrip(Trip trip) {
+        List<Trip> trips = new ArrayList<Trip>();
+        trips.add(trip);
+        displayTrips(trips);
     }
 }
