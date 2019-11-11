@@ -91,7 +91,7 @@ public class BookingDaoImpl implements BookingDao{
         int bookingID = Integer.parseInt(arr[1]);
         int count = Integer.parseInt(arr[2]);
 //        String user = arr[3];
-        User user =
+        User user = new User(arr[3]);
         return new Booking(tripId, count, user);
     }
 }
