@@ -13,9 +13,10 @@ public interface BookingDao {
     void addBooking(int tripId, User user);
 
     void deleteBooking(int id);
-    int getCount(int bookingId);
+    int getCount(int tripId);
     void updateBooking(int id, int tripId, User user);
     void write() throws IOException;
     void read() throws IOException;
     Booking transformStringToBooking(String str) throws ParseException;
+    List<Booking> getBookingsByUser(User user);
 }

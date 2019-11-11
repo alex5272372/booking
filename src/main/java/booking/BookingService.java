@@ -1,6 +1,5 @@
 package booking;
 
-import trip.Trip;
 import users.User;
 
 import java.io.IOException;
@@ -18,10 +17,11 @@ public interface BookingService {
 
     void deleteBooking(int bookingId);
 
-    int getCount(int bookingId);
+    int getCount(int tripId);
     void displayBookings(List<Booking> bookings);
 
     void write() throws IOException;
     void read()throws IOException;
     Booking transformStringToBooking(String str) throws ParseException;
+    List<Booking> getBookingsByUser(User user);
 }

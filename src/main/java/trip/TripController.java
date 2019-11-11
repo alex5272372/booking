@@ -1,5 +1,6 @@
 package trip;
 
+import booking.BookingController;
 import main.City;
 
 import java.io.IOException;
@@ -54,11 +55,11 @@ public class TripController {
         return tripService.transformStringToTrip(str);
     }
 
-    public void displayTrips(List<Trip> trips) {
-        tripService.displayTrips(trips);
+    public void displayTrips(List<Trip> trips, BookingController bookingController) {
+        tripService.displayTrips(trips, bookingController);
     }
 
-    public void displayTrip(Trip trip) {
-        tripService.displayTrip(trip);
+    public void displayTrip(Trip trip, BookingController bookingController) {
+        tripService.displayTrip(trip, bookingController);
     }
 }

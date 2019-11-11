@@ -28,16 +28,6 @@ public class Board {
         this.state = state;
     }
 
-    public void displayMenu() {
-        System.out.println("1. Trips board");
-        System.out.println("2. View trip information");
-        System.out.println("3. Book a trip");
-        System.out.println("4. Cancel trip booking");
-        System.out.println("5. My trips");
-        System.out.println("6. Logout");
-        System.out.println("7. Exit");
-    }
-
     public void inputCommand(Users users, TripController tripController, BookingController bookingController) throws extInputException {
         Scanner sc = new Scanner(System.in);
 
@@ -52,11 +42,18 @@ public class Board {
             setState(State.MAIN_MENU);
 
         } else if(state == State.MAIN_MENU) {
-            displayMenu();
+            System.out.println("1. Trips board\n" +
+                    "2. View trip information\n" +
+                    "3. Book a trip\n" +
+                    "4. Cancel trip booking\n" +
+                    "5. My trips\n" +
+                    "6. Logout\n" +
+                    "7. Exit");
             int item = sc.nextInt();
             sc.nextLine();
+
             if(item == 1) {
-                tripController.displayTrips(tripController.getNearestTrips(24));
+                tripController.displayTrips(tripController.getNearestTrips(24), bookingController);
             } else if(item == 2) {
                 setState(State.GET_TRIP);
             } else if(item == 3) {
@@ -64,7 +61,8 @@ public class Board {
             } else if(item == 4) {
                 setState(State.UNDO_BOOKING);
             } else if(item == 5) {
-                bookingController.displayBookings(bookingController.getAllBookings());
+                bookingController.displayBookings(bookingController.getBookingsByUser(user.get()));
+                //bookingController.displayBookings(bookingController.getAllBookings());
             } else if(item == 6) {
                 setState(State.LOGIN);
             } else if(item == 7) {
@@ -78,7 +76,7 @@ public class Board {
             int id = sc.nextInt();
             sc.nextLine();
             Trip trip = tripController.getTrip(id);
-            tripController.displayTrip(trip);
+            tripController.displayTrip(trip, bookingController);
             setState(State.MAIN_MENU);
 
         } else if(state == State.FIND_TRIP) {
@@ -99,7 +97,7 @@ public class Board {
 
                 Date date = dateFormat.parse(dateString);
 
-                tripController.displayTrips(tripController.getTripsByParams(date, City.KYIV, City.get(dest)));
+                tripController.displayTrips(tripController.getTripsByParams(date, City.KYIV, City.get(dest)), bookingController);
                 setState(State.BOOK_TRIP);
             } catch (ParseException e) {
                 System.out.println("ERROR: Incorrect input for date");
