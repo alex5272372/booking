@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BookingDaoImpl implements BookingDao{
+public  class BookingDaoImpl implements BookingDao{
 
     private List<Booking> bookingList = new ArrayList<>();
 
@@ -23,15 +23,14 @@ public class BookingDaoImpl implements BookingDao{
     public Booking getBooking(int id) {
         return getAllBookings().stream().filter(booking -> booking.getBookingId() == id).findFirst().get();
     }
-    public void addBooking(int tripId, int count, User user) {
-        bookingList.add(new Booking(tripId, count, user));
+    public void addBooking(int tripId, User user) {
+        bookingList.add(new Booking(tripId,  user));
     }
 
-    public void updateBooking(int tripId,int bookingId,int count,User user) {
+    public void updateBooking(int tripId,int bookingId,User user) {
         if (isPresentId(bookingId)) {
             getBooking(bookingId).setTripId(tripId);
             getBooking(bookingId).setBookingId(bookingId);
-            getBooking(bookingId).setCount(count);
             getBooking(bookingId).setUser(user);
         }
     }
@@ -42,15 +41,10 @@ public class BookingDaoImpl implements BookingDao{
     }
 
     @Override
-    public void updateBooking(int id, int tripId, User user) {
-
+    public int getCount(int bookingId) {
+        return 0;
     }
 
-
-
-    public int getCount (int bookingId){
-        return getBooking(bookingId).getCountLeft(bookingId);
-    };
 
     public List<Booking> getBookingsByUser(User user){
         return getAllBookings().stream().filter(booking -> booking.getUser() == user)
@@ -87,11 +81,7 @@ public class BookingDaoImpl implements BookingDao{
     }
     public Booking transformStringToBooking(String str) throws ParseException {
         String[] arr = str.split(";");
-        int tripId = Integer.parseInt(arr[0]);
-        int bookingID = Integer.parseInt(arr[1]);
-        int count = Integer.parseInt(arr[2]);
-//        String user = arr[3];
-        User user = new User(arr[3]);
-        return new Booking(tripId, count, user);
+        User user = new User(arr[2], arr[3]);
+        return new Booking(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), user);
     }
 }

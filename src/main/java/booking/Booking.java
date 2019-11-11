@@ -7,17 +7,20 @@ import java.util.Random;
 public class Booking {
     private int tripId;
     private int bookingId;
-    private int count;
     private User user;
     private BookingController bookingController;
-    private int countLeft;
 
-    public Booking(int tripId, int count, User user) {
+    public Booking(int tripId, User user) {
         this.tripId = tripId;
         this.bookingId = generateId();
-        this.count = count;
-        this.countLeft = getCountLeft(count);
         this.user = user;
+    }
+
+    public Booking(int bookingId, int tripId, User user) {
+        this.tripId = tripId;
+        this.bookingId = bookingId;
+        this.user = user;
+
     }
 
     public int getBooking() {
@@ -28,25 +31,15 @@ public class Booking {
         this.tripId = tripId;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-
 
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
     }
 
-    public int getCountLeft(int count) {
-        return 1;
-    }
-    public int getCount (int count) {
-        return count;
-    }
     public int getBookingId() {
         return bookingId;
     }
+
     public User getUser() {
         return user;
     }
@@ -64,7 +57,8 @@ public class Booking {
     }
 
     public String toString() {
-        return String.format(String.valueOf(bookingId), tripId, user.getFullName());
+        return String.format("|%10d |%10d | %-40s|",
+                bookingId, tripId, user.getFullName());
     }
 
     private int generateId() {
@@ -86,10 +80,10 @@ public class Booking {
     }
 
     String toCsvString() {
-        return this.tripId + ";" +
-                this.bookingId + ";" +
-                this.count + ";" +
-                this.getUser() + ";";
+        return this.bookingId + ";" +
+                this.tripId + ";" +
+                this.user.getLogin()+ ";"+
+                this.user.getPassword()+ ";";
     }
 
 }

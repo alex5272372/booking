@@ -21,8 +21,10 @@ public class BookingServiceImpl implements BookingService {
         return bookingDao.getBooking(id);
     }
 
-    public void addBooking(int tripId, int count, User user) {
-        bookingDao.addBooking(tripId, count, user);
+
+
+    public void addBooking(int tripId, User user) {
+        bookingDao.addBooking(tripId, user);
     }
 
     public void updateBooking(int id, int tripId, User user) {

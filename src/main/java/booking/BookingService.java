@@ -12,13 +12,14 @@ public interface BookingService {
 
     Booking getBooking(int bookingId);
 
-    void addBooking(int tripId, int count, User user);
+    void addBooking(int tripId, User user);
 
     void updateBooking(int tripId, int bookingId, User user);
 
     void deleteBooking(int bookingId);
 
     int getCount(int bookingId);
+    void displayBookings(List<Booking> bookings);
 
     void write() throws IOException;
     void read()throws IOException;
