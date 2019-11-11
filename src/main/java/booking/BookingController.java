@@ -1,6 +1,10 @@
 package booking;
 
+import trip.Trip;
 import users.User;
+
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 public class BookingController {
@@ -36,5 +40,16 @@ public class BookingController {
 
     public void displayBookings(List<Booking> bookings) {
         bookingService.displayBookings(bookings);
+    }
+    public void read() throws IOException {
+        bookingService.read();
+    }
+
+    public void write() throws IOException {
+        bookingService.write();
+    }
+
+    public Booking transformStringToBooking(String str) throws ParseException {
+        return bookingService.transformStringToBooking(str);
     }
 }
