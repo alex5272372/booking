@@ -19,8 +19,12 @@ public class TripDaoImpl implements TripDao {
         return getAllTrips().stream().filter(trip -> trip.getId() == id).findFirst().get();
     }
 
-    public void addTrip(Date date, City from, City to, int count) {
-        tripList.add(new Trip(date, from, to, count));
+    public void addTrip(Date date, City from, City to, int count, TripController tripController) {
+        tripList.add(new Trip(date, from, to, count, tripController));
+    }
+
+    public void addTrip(Trip trip) {
+        tripList.add(trip);
     }
 
     public void updateTrip(int id, Date date, City from, City to, int count) {

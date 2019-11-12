@@ -68,9 +68,9 @@ public class TripControllerTest {
 
     @Before
     public void init() {
-        tc.addTrip(date1, City.LVIV, City.KHARKIV, 320);
-        tc.addTrip(date2, City.MYKOLAIV, City.KRYVYI_RIH, 300);
-        tc.addTrip(date3, City.KYIV, City.KHARKIV, 260);
+        tc.addTrip(date1, City.LVIV, City.KHARKIV, 320,tc);
+        tc.addTrip(date2, City.MYKOLAIV, City.KRYVYI_RIH, 300,tc);
+        tc.addTrip(date3, City.KYIV, City.KHARKIV, 260,tc);
 
         id = tc.getAllTrips().stream().mapToInt(Trip::getId).toArray();
     }

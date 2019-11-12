@@ -22,11 +22,22 @@ public class TripTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Test
+    public void testThatIsNotUniqueIdReturnsProperResult() {
+        boolean expectedResult = true;
+        boolean actualResult = trip1.isNotUniqueId(id[0],tc);
+        assertEquals(expectedResult, actualResult);
+    }
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    private TripDaoImpl td = new TripDaoImpl();
+    private TripServiceImpl ts = new TripServiceImpl(td);
+    private TripController tc = new TripController(ts);
 
     private String dateStr1 = "11/11/2019 12:40";
     private Date date1 = dateFormat.parse(dateStr1);
-    private Trip trip1 = new Trip(date1, City.LVIV, City.KHARKIV, 320);
+    private Trip trip1 = new Trip(date1, City.LVIV, City.KHARKIV, 320,tc);
     int id1 = trip1.getId();
 
     private int[] id;
@@ -34,13 +45,9 @@ public class TripTest {
     public TripTest() throws ParseException {
     }
 
-    private TripDaoImpl td = new TripDaoImpl();
-    private TripServiceImpl ts = new TripServiceImpl(td);
-    private TripController tc = new TripController(ts);
-
     @Before
     public void init() {
-        tc.addTrip(date1, City.LVIV, City.KHARKIV, 320);
+        tc.addTrip(date1, City.LVIV, City.KHARKIV, 320, tc);
         id = tc.getAllTrips().stream().mapToInt(Trip::getId).toArray();
     }
 }

@@ -47,6 +47,8 @@ public class TripDaoImplTest {
     }
 
     private TripDaoImpl td = new TripDaoImpl();
+    private TripServiceImpl ts = new TripServiceImpl(td);
+    private TripController tc = new TripController(ts);
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -65,9 +67,9 @@ public class TripDaoImplTest {
 
     @Before
     public void init() {
-        td.addTrip(date1, City.LVIV, City.KHARKIV, 320);
-        td.addTrip(date2, City.MYKOLAIV, City.KRYVYI_RIH, 300);
-        td.addTrip(date3, City.KYIV, City.KHARKIV, 260);
+        td.addTrip(date1, City.LVIV, City.KHARKIV, 320,tc);
+        td.addTrip(date2, City.MYKOLAIV, City.KRYVYI_RIH, 300,tc);
+        td.addTrip(date3, City.KYIV, City.KHARKIV, 260,tc);
 
         id = td.getAllTrips().stream().mapToInt(Trip::getId).toArray();
     }

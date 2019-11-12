@@ -4,7 +4,6 @@ import booking.BookingController;
 import main.City;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,8 +25,12 @@ public class TripServiceImpl implements TripService{
         return tripDao.getTrip(id);
     }
 
-    public void addTrip(Date date, City from, City to, int count) {
-        tripDao.addTrip(date, from, to, count);
+    public void addTrip(Date date, City from, City to, int count, TripController tripController) {
+        tripDao.addTrip(date, from, to, count, tripController);
+    }
+
+    public void addTrip(Trip trip) {
+        tripDao.addTrip(trip);
     }
 
     public void updateTrip(int id, Date date, City from, City to, int count) {
@@ -67,7 +70,7 @@ public class TripServiceImpl implements TripService{
     }
 
     public void displayTrip(Trip trip, BookingController bookingController) {
-        List<Trip> trips = new ArrayList<Trip>();
+        List<Trip> trips = new ArrayList<>();
         trips.add(trip);
         displayTrips(trips, bookingController);
     }

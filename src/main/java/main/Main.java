@@ -21,6 +21,7 @@ public class Main {
         TripController tripController = new TripController(new TripServiceImpl(new TripDaoImpl()));
         try {
             tripController.read();
+            tripController.generateTripsDB(tripController);
         } catch (IOException e) {
             e.printStackTrace();
         }
