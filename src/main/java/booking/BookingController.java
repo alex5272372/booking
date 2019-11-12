@@ -52,4 +52,9 @@ public class BookingController {
     public Booking transformStringToBooking(String str) throws ParseException {
         return bookingService.transformStringToBooking(str);
     }
+
+    public List<Booking> getBookingsByUser(User user) {
+        return bookingService.getBookingsByUser(user);
+    }
+
 }

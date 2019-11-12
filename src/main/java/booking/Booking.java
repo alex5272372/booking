@@ -31,6 +31,9 @@ public class Booking {
         this.tripId = tripId;
     }
 
+    public int getTripId() {
+        return tripId;
+    }
 
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
@@ -58,7 +61,7 @@ public class Booking {
 
     public String toString() {
         return String.format("|%10d |%10d | %-40s|",
-                bookingId, tripId, user.getFullName());
+                bookingId, tripId, user.getLogin());
     }
 
     private int generateId() {

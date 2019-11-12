@@ -1,6 +1,6 @@
 package trip;
 
-import booking.Booking;
+import booking.BookingController;
 import main.City;
 
 import java.io.IOException;
@@ -56,15 +56,15 @@ public class TripServiceImpl implements TripService{
         return tripDao.transformStringToTrip(str);
     }
 
-    public void displayTrips(List<Trip> trips) {
+    public void displayTrips(List<Trip> trips, BookingController bookingController) {
         System.out.println(Trip.toStringHeader());
-        trips.stream().forEach(trip -> System.out.println(trip.toString(0)));
+        trips.stream().forEach(trip -> System.out.println(trip.toString(trip.getCount() - bookingController.getCount(trip.getId()))));
         System.out.println(Trip.toStringFooter());
     }
 
-    public void displayTrip(Trip trip) {
+    public void displayTrip(Trip trip, BookingController bookingController) {
         List<Trip> trips = new ArrayList<Trip>();
         trips.add(trip);
-        displayTrips(trips);
+        displayTrips(trips, bookingController);
     }
 }

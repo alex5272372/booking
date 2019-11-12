@@ -38,7 +38,7 @@ public class Users {
 
     public User getOrAddUser(String login) {
         List<User> resList = users.stream()
-                .filter(user -> login.equals(user.getLogin()) || login.equals(user.getFullName()))
+                .filter(user -> login.equals(user.getLogin()))
                 .collect(Collectors.toList());
 
         if(resList.isEmpty()) {
