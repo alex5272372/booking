@@ -10,15 +10,15 @@ public class Trip {
     private City from;
     private City to;
     private int count;
-
     private TripController tripController;
 
-    public Trip(Date date, City from, City to, int count) {
+    public Trip(Date date, City from, City to, int count, TripController tripController) {
         this.id = generateId();
         this.date = date;
         this.from = from;
         this.to = to;
         this.count = count;
+        this.tripController = tripController;
     }
 
     public Trip(int id, Date date, City from, City to, int count) {
@@ -88,7 +88,7 @@ public class Trip {
 
     public int generateId() {
         int id = getRandomInt(1000, 9999);
-        while (isNotUniqueId(id)) {
+        while (isNotUniqueId(id, tripController)) {
             id = getRandomInt(1000, 9999);
         }
         return id;
@@ -99,7 +99,7 @@ public class Trip {
         return from + random.nextInt(to - from + 1);
     }
 
-    boolean isNotUniqueId(int id) {
+    boolean isNotUniqueId(int id, TripController tripController) {
         if (tripController == null) return false;
         return tripController.getAllTrips().stream().anyMatch(trip -> trip.getId() == id);
     }
