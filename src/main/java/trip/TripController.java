@@ -51,10 +51,6 @@ public class TripController {
         tripService.write();
     }
 
-    public Trip transformStringToTrip(String str) throws ParseException {
-        return tripService.transformStringToTrip(str);
-    }
-
     public void displayTrips(List<Trip> trips, BookingController bookingController) {
         tripService.displayTrips(trips, bookingController);
     }

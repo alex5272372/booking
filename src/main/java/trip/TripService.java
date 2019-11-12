@@ -3,7 +3,6 @@ package trip;
 import booking.BookingController;
 import main.City;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +16,6 @@ public interface TripService {
     List<Trip> getTripsByParams(Date date, City from, City to);
     void write() throws IOException;
     void read()throws IOException;
-    Trip transformStringToTrip(String str) throws ParseException;
     void displayTrips(List<Trip> trips, BookingController bookingController);
     void displayTrip(Trip trip, BookingController bookingController);
 }

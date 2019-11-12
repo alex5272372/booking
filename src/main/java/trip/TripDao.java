@@ -13,9 +13,6 @@ public interface TripDao {
     void addTrip(Date date, City from, City to, int count);
     void updateTrip(int id, Date date, City from, City to, int count);
     void deleteTrip(int id);
-    List<Trip> getNearestTrips(int hours);
-    List<Trip> getTripsByParams(Date date, City from, City to);
     void write() throws IOException;
     void read() throws IOException;
-    Trip transformStringToTrip(String str) throws ParseException;
 }
