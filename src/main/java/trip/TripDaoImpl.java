@@ -40,20 +40,6 @@ public class TripDaoImpl implements TripDao {
         return getAllTrips().stream().anyMatch(trip -> trip.getId() == id);
     }
 
-    public List<Trip> getNearestTrips(int hours) {
-        return getAllTrips().stream().filter(trip -> (trip.getDate().getTime() > new Date().getTime()) &&
-                (trip.getDate().getTime() < new Date().getTime() + 1000 * 60 * 60 * hours))
-                .collect(Collectors.toList());
-    }
-
-    public List<Trip> getTripsByParams(Date date, City from, City to) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return getAllTrips().stream().filter(trip -> (dateFormat.format(trip.getDate()).equals(dateFormat.format(date))) &&
-                (trip.getFrom() == from) &&
-                (trip.getTo() == to))
-                .collect(Collectors.toList());
-    }
-
     public void read() throws IOException {
         File tripFile = new File("./trips.csv");
         BufferedReader br = new BufferedReader(new FileReader(tripFile));

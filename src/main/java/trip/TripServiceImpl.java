@@ -1,13 +1,15 @@
 package trip;
 
-import booking.Booking;
+import booking.BookingController;
 import main.City;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TripServiceImpl implements TripService{
     private TripDao tripDao;
@@ -37,11 +39,17 @@ public class TripServiceImpl implements TripService{
     }
 
     public List<Trip> getNearestTrips(int hours) {
-        return tripDao.getNearestTrips(hours);
+        return getAllTrips().stream().filter(trip -> (trip.getDate().getTime() > new Date().getTime()) &&
+                (trip.getDate().getTime() < new Date().getTime() + 1000 * 60 * 60 * hours))
+                .collect(Collectors.toList());
     }
 
     public List<Trip> getTripsByParams(Date date, City from, City to) {
-        return tripDao.getTripsByParams(date, from, to);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return getAllTrips().stream().filter(trip -> (dateFormat.format(trip.getDate()).equals(dateFormat.format(date))) &&
+                (trip.getFrom() == from) &&
+                (trip.getTo() == to))
+                .collect(Collectors.toList());
     }
 
     public void read() throws IOException {
@@ -52,19 +60,15 @@ public class TripServiceImpl implements TripService{
         tripDao.write();
     }
 
-    public Trip transformStringToTrip(String str) throws ParseException {
-        return tripDao.transformStringToTrip(str);
-    }
-
-    public void displayTrips(List<Trip> trips) {
+    public void displayTrips(List<Trip> trips, BookingController bookingController) {
         System.out.println(Trip.toStringHeader());
-        trips.stream().forEach(trip -> System.out.println(trip.toString(0)));
+        trips.stream().forEach(trip -> System.out.println(trip.toString(trip.getCount() - bookingController.getCount(trip.getId()))));
         System.out.println(Trip.toStringFooter());
     }
 
-    public void displayTrip(Trip trip) {
+    public void displayTrip(Trip trip, BookingController bookingController) {
         List<Trip> trips = new ArrayList<Trip>();
         trips.add(trip);
-        displayTrips(trips);
+        displayTrips(trips, bookingController);
     }
 }

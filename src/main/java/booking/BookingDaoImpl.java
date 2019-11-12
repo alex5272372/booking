@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public  class BookingDaoImpl implements BookingDao{
 
@@ -41,13 +42,13 @@ public  class BookingDaoImpl implements BookingDao{
     }
 
     @Override
-    public int getCount(int bookingId) {
-        return 0;
+    public int getCount(int tripId) {
+        return (int) getAllBookings().stream().filter(booking -> booking.getTripId() == tripId).count();
     }
 
 
     public List<Booking> getBookingsByUser(User user){
-        return getAllBookings().stream().filter(booking -> booking.getUser() == user)
+        return getAllBookings().stream().filter(booking -> booking.getUser().equals(user))
                 .collect(Collectors.toList());
     }
     public boolean isPresentId(int id) {

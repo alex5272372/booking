@@ -12,7 +12,6 @@ import users.Users;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
-//import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,15 +43,8 @@ public class Main {
             }
         }
 
-        /*tripController.addTrip(new Date(), City.KYIV, City.LVIV, 100);
-        tripController.addTrip(new Date(), City.KYIV, City.ODESSA, 100);*/
-
         try {
             tripController.write();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
             bookingController.write();
         } catch (IOException e) {
             e.printStackTrace();

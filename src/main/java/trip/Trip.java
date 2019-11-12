@@ -2,8 +2,7 @@ package trip;
 
 import main.City;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public class Trip {
     private int id;
@@ -50,7 +49,7 @@ public class Trip {
         this.from = from;
     }
 
-    public Enum getTo() {
+    public City getTo() {
         return to;
     }
 
