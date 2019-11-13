@@ -21,7 +21,7 @@ public class BookingTest {
     private String dateStr1 = "11/11/2019 12:40";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private Date date = dateFormat.parse(dateStr1);
-    private Trip trip = new Trip(date, City.LVIV, City.KHARKIV, 320);
+    private Trip trip = new Trip(1111, date, City.LVIV, City.KHARKIV, 320);
     private User user = new User("testLogin");
     private Booking booking = new Booking(trip.getId(), user);
 
