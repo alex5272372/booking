@@ -29,7 +29,7 @@ public class Board {
         this.state = state;
     }
 
-    public void inputCommand(Users users, TripController tripController, BookingController bookingController) throws extInputException {
+    public void inputCommand(Users users, TripController tripController, BookingController bookingController) throws InputOutOfRangeException {
         Scanner sc = new Scanner(System.in);
 
         LoggerRoot logger = new LoggerRoot();
@@ -68,13 +68,12 @@ public class Board {
                 setState(State.UNDO_BOOKING);
             } else if (item == 5) {
                 bookingController.displayBookings(bookingController.getBookingsByUser(user.get()));
-                //bookingController.displayBookings(bookingController.getAllBookings());
             } else if (item == 6) {
                 setState(State.LOGIN);
             } else if (item == 7) {
                 setState(State.EXIT);
             } else {
-                throw new extInputException("Item does not exist");
+                throw new InputOutOfRangeException("Item does not exist");
             }
 
         } else if (state == State.GET_TRIP) {
@@ -96,7 +95,7 @@ public class Board {
                 logger.printAction("destination ID", Integer.toString(dest));
                 sc.nextLine();
                 if (dest >= City.getCount()) {
-                    throw new extInputException("City does not exist");
+                    throw new InputOutOfRangeException("City does not exist");
                 }
 
                 System.out.println("Enter date in format dd/MM/yyyy:");
@@ -125,7 +124,7 @@ public class Board {
             if (id != -1) {
                 Trip trip = tripController.getTrip(id);
                 if (trip.getCount() < bookingController.getCount(id) + count) {
-                    throw new extInputException("Not enough places for booking");
+                    throw new InputOutOfRangeException("Not enough places for booking");
                 }
 
                 for (int i = 1; i <= count; i++) {

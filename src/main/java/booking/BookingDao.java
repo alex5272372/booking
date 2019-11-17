@@ -1,6 +1,5 @@
 package booking;
 
-import trip.Trip;
 import users.User;
 
 import java.io.IOException;
