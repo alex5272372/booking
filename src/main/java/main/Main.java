@@ -2,7 +2,7 @@ package main;
 
 import board.Board;
 import board.State;
-import board.extInputException;
+import board.InputOutOfRangeException;
 import booking.BookingController;
 import trip.TripController;
 import trip.TripDaoImpl;
@@ -39,7 +39,7 @@ public class Main {
                 board.inputCommand(users, tripController, bookingController);
             } catch (InputMismatchException e) {
                 System.out.println("ERROR: Your input is invalid, please try again");
-            } catch (NoSuchElementException | extInputException e) {
+            } catch (NoSuchElementException | InputOutOfRangeException e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
         }

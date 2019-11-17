@@ -17,8 +17,6 @@ public class User {
         this.password = String.valueOf(random.nextInt(1000000));
     }
 
-
-
     public String getLogin() {
         return login;
     }
