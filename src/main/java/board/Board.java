@@ -67,7 +67,8 @@ public class Board {
             } else if (item == 4) {
                 setState(State.UNDO_BOOKING);
             } else if (item == 5) {
-                bookingController.displayBookings(bookingController.getBookingsByUser(user.get()));
+                //bookingController.displayBookings(bookingController.getBookingsByUser(user.get()));
+                bookingController.displayBookings(bookingController.getAllBookings());
             } else if (item == 6) {
                 setState(State.LOGIN);
             } else if (item == 7) {
