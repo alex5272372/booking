@@ -54,6 +54,7 @@ public class Board {
                     "5. My trips\n" +
                     "6. Logout\n" +
                     "7. Exit");
+
             int item = sc.nextInt();
             logger.printAction("selected item", Integer.toString(item));
             sc.nextLine();
@@ -133,6 +134,7 @@ public class Board {
                     String input = sc.nextLine();
                     User passenger = users.getOrAddUser(input);
                     User admin = user.get();
+
                     bookingController.addBooking(id, admin, passenger);
                 }
                 System.out.println("BOOKING COMPLETED");

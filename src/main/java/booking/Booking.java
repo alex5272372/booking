@@ -69,11 +69,11 @@ public class Booking {
     }
 
     public static String toStringHeader() {
-        return "+----id-----+--tripId---+------------------user-------------------+---passenger---------+";
+        return "+----id-----+--tripId---+------------------user-------------------+--passenger------+";
     }
 
     public static String toStringFooter() {
-        return "+-----------+-----------+-----------------------------------------+---------------------+";
+        return "+-----------+-----------+-----------------------------------------+-----------------+";
     }
 
     public String toString() {
