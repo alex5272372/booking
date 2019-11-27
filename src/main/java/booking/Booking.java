@@ -69,16 +69,16 @@ public class Booking {
     }
 
     public static String toStringHeader() {
-        return "+----id-----+--tripId---+------------------user-------------------+";
+        return "+----id-----+--tripId---+------------------user-------------------+---passenger---------+";
     }
 
     public static String toStringFooter() {
-        return "+-----------+-----------+-----------------------------------------+";
+        return "+-----------+-----------+-----------------------------------------+---------------------+";
     }
 
     public String toString() {
-        return String.format("|%10d |%10d | %-40s| %-10s|",
-                bookingId, tripId, user.getLogin(), passenger);
+        return String.format("|%10d |%10d | %-40s| %-20s|",
+                bookingId, tripId, user.getLogin(), passenger.getLogin());
     }
 
     private int generateId() {
