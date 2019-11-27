@@ -20,8 +20,8 @@ public class BookingController {
         return bookingService.getBooking(id);
     }
 
-    public void addBooking(int tripId, User user) {
-        bookingService.addBooking(tripId, user);
+    public void addBooking(int tripId, User user, User passenger) {
+        bookingService.addBooking(tripId, user, passenger);
     }
 
     public void deleteBooking(int id) {
