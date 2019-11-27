@@ -9,7 +9,7 @@ import java.util.List;
 public interface BookingDao {
     List<Booking> getAllBookings();
     Booking getBooking(int bookingId);
-    void addBooking(int tripId, User user);
+    void addBooking(int tripId, User user, User passenger);
 
     void deleteBooking(int id);
     int getCount(int tripId);

@@ -21,8 +21,10 @@ public  class BookingDaoImpl implements BookingDao{
         return getAllBookings().stream().filter(booking -> booking.getBookingId() == id).findFirst().get();
     }
 
-    public void addBooking(int tripId, User user) {
-        bookingList.add(new Booking(tripId,  user));
+
+
+    public void addBooking(int tripId, User user, User passenger) {
+        bookingList.add(new Booking(tripId,  user, passenger));
     }
 
     public void updateBooking(int tripId,int bookingId,User user) {
@@ -81,6 +83,7 @@ public  class BookingDaoImpl implements BookingDao{
     public Booking transformStringToBooking(String str) throws ParseException {
         String[] arr = str.split(";");
         User user = new User(arr[2], arr[3]);
-        return new Booking(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), user);
+        User passenger = new User(arr[4]);
+        return new Booking(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), user, passenger);
     }
 }

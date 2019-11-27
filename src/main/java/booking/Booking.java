@@ -10,22 +10,39 @@ public class Booking {
     private User user;
     private BookingController bookingController;
 
+
+    private User passenger;
+
     public Booking(int tripId, User user) {
         this.tripId = tripId;
         this.bookingId = generateId();
         this.user = user;
+    }
+    public Booking(int tripId, User user, User passenger){
+        this.tripId=tripId;
+        this.bookingId=generateId();
+        this.user=user;
+        this.passenger=passenger;
     }
 
     public Booking(int bookingId, int tripId, User user) {
         this.tripId = tripId;
         this.bookingId = bookingId;
         this.user = user;
+    }
 
+    public Booking(int tripId, int bookingId, User user, User passenger) {
+        this.tripId=tripId;
+        this.bookingId=generateId();
+        this.user=user;
+        this.passenger=passenger;
     }
 
     public int getBooking() {
         return bookingId;
     }
+
+    public User getpassenger(){return passenger;};
 
     public void setTripId(int tripId) {
         this.tripId = tripId;
@@ -60,8 +77,8 @@ public class Booking {
     }
 
     public String toString() {
-        return String.format("|%10d |%10d | %-40s|",
-                bookingId, tripId, user.getLogin());
+        return String.format("|%10d |%10d | %-40s| %-10s|",
+                bookingId, tripId, user.getLogin(), passenger);
     }
 
     private int generateId() {
@@ -86,7 +103,8 @@ public class Booking {
         return this.bookingId + ";" +
                 this.tripId + ";" +
                 this.user.getLogin()+ ";"+
-                this.user.getPassword()+ ";";
+                this.user.getPassword()+ ";"+
+                this.passenger + ";";
     }
 
 }

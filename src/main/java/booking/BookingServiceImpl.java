@@ -19,8 +19,8 @@ public class BookingServiceImpl implements BookingService {
         return bookingDao.getBooking(id);
     }
 
-    public void addBooking(int tripId, User user) {
-        bookingDao.addBooking(tripId, user);
+    public void addBooking(int tripId, User user, User passenger) {
+        bookingDao.addBooking(tripId, user, passenger);
     }
 
     public void deleteBooking(int id) {
@@ -45,7 +45,7 @@ public class BookingServiceImpl implements BookingService {
 
     public void displayBookings(List<Booking> bookings) {
         System.out.println(Booking.toStringHeader());
-        bookings.stream().forEach(booking -> System.out.println(booking.toString()));
+        bookings.forEach(booking -> System.out.println(booking.toString()));
         System.out.println(Booking.toStringFooter());
     }
 }

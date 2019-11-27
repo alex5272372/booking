@@ -20,9 +20,9 @@ public class BookingDaoImplTest {
 
     @Before
     public void init() {
-        bookingDao.addBooking(777, user);
-        bookingDao.addBooking(666, user);
-        bookingDao.addBooking(555, user);
+        bookingDao.addBooking(777, user, user);
+        bookingDao.addBooking(666, user,user);
+        bookingDao.addBooking(555, user,user);
 
         id = bookingDao.getAllBookings().stream().mapToInt(Booking::getBookingId).toArray();
     }
