@@ -46,7 +46,7 @@ public  class BookingDaoImpl implements BookingDao{
     }
 
     public List<Booking> getBookingsByUser(User user){
-        return getAllBookings().stream().filter(booking -> booking.getUser().equals(user))
+        return getAllBookings().stream().filter(booking -> booking.getUser().equals(user) || booking.getPassenger().equals(user))
                 .collect(Collectors.toList());
     }
     public boolean isPresentId(int id) {

@@ -13,22 +13,11 @@ public class Booking {
 
     private User passenger;
 
-    public Booking(int tripId, User user) {
-        this.tripId = tripId;
-        this.bookingId = generateId();
-        this.user = user;
-    }
     public Booking(int tripId, User user, User passenger){
         this.tripId=tripId;
         this.bookingId=generateId();
         this.user=user;
         this.passenger=passenger;
-    }
-
-    public Booking(int bookingId, int tripId, User user) {
-        this.tripId = tripId;
-        this.bookingId = bookingId;
-        this.user = user;
     }
 
     public Booking(int tripId, int bookingId, User user, User passenger) {
@@ -62,6 +51,10 @@ public class Booking {
 
     public User getUser() {
         return user;
+    }
+
+    public User getPassenger() {
+        return passenger;
     }
 
     public void setUser(User user) {
