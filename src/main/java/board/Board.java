@@ -54,6 +54,7 @@ public class Board {
                     "5. My trips\n" +
                     "6. Logout\n" +
                     "7. Exit");
+
             int item = sc.nextInt();
             logger.printAction("selected item", Integer.toString(item));
             sc.nextLine();
@@ -130,9 +131,11 @@ public class Board {
                 for (int i = 1; i <= count; i++) {
                     System.out.println("USER " + i);
                     System.out.println("Enter first name and last name, or login:");
-                    String login = sc.nextLine();
-                    User user = users.getOrAddUser(login);
-                    bookingController.addBooking(id, user);
+                    String input = sc.nextLine();
+                    User passenger = users.getOrAddUser(input);
+                    User admin = user.get();
+
+                    bookingController.addBooking(id, admin, passenger);
                 }
                 System.out.println("BOOKING COMPLETED");
                 logger.printAction("for cancel", Integer.toString(id));

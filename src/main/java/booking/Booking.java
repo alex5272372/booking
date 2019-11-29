@@ -10,22 +10,28 @@ public class Booking {
     private User user;
     private BookingController bookingController;
 
-    public Booking(int tripId, User user) {
-        this.tripId = tripId;
-        this.bookingId = generateId();
-        this.user = user;
+
+    private User passenger;
+
+    public Booking(int tripId, User user, User passenger){
+        this.tripId=tripId;
+        this.bookingId=generateId();
+        this.user=user;
+        this.passenger=passenger;
     }
 
-    public Booking(int bookingId, int tripId, User user) {
-        this.tripId = tripId;
-        this.bookingId = bookingId;
-        this.user = user;
-
+    public Booking(int tripId, int bookingId, User user, User passenger) {
+        this.tripId=tripId;
+        this.bookingId=generateId();
+        this.user=user;
+        this.passenger=passenger;
     }
 
     public int getBooking() {
         return bookingId;
     }
+
+    public User getpassenger(){return passenger;};
 
     public void setTripId(int tripId) {
         this.tripId = tripId;
@@ -47,21 +53,25 @@ public class Booking {
         return user;
     }
 
+    public User getPassenger() {
+        return passenger;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
     public static String toStringHeader() {
-        return "+----id-----+--tripId---+------------------user-------------------+";
+        return "+----id-----+--tripId---+------------------user-------------------+--passenger------+";
     }
 
     public static String toStringFooter() {
-        return "+-----------+-----------+-----------------------------------------+";
+        return "+-----------+-----------+-----------------------------------------+-----------------+";
     }
 
     public String toString() {
-        return String.format("|%10d |%10d | %-40s|",
-                bookingId, tripId, user.getLogin());
+        return String.format("|%10d |%10d | %-40s| %-20s|",
+                bookingId, tripId, user.getLogin(), passenger.getLogin());
     }
 
     private int generateId() {
@@ -86,7 +96,8 @@ public class Booking {
         return this.bookingId + ";" +
                 this.tripId + ";" +
                 this.user.getLogin()+ ";"+
-                this.user.getPassword()+ ";";
+                this.user.getPassword()+ ";"+
+                this.passenger + ";";
     }
 
 }

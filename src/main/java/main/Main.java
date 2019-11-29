@@ -17,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
         Users users = new Users();
         users.addUser("guest", "1");
+        users.addUser("test", "test");
 
         TripController tripController = new TripController(new TripServiceImpl(new TripDaoImpl()));
         try {
